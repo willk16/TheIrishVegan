@@ -1,0 +1,231 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/site.css" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Content/themes/base/css")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!--My Modal worked when I added the 3 scripts below-->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+    <!--This JavaScript code allows for the navbar to be opened and closed on smaller screens. It toggles between showing the list elements and hiding them-->
+    <script>
+        $(document).ready(function(){
+            $(".handle").click(function(){
+                $("nav ul").toggleClass("showing");
+            });
+        });
+    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+</head>
+<body style="width:100%; background-color:#83dd7e">
+
+    @*<nav class="navbar fixed-top navbar-toggleable-xl navbar-inverse" style="background-color: green;">
+        <div class="container">
+            <!--This div is making the nav bar elements be inline with the main body's columns-->
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <!--mr-auto will cause the right margin to be 0 and thus will hug the right of the screem-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#speakers">Speakers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#schedule">Schedule</a>
+                    </li>
+                </ul>
+                <a class="navbar-brand pull-sm-right hidden-xs-down" href="http://www.treehouse.com">Presented by Treehouse</a><!--I've included hidden-xs-down so when the device is xs this link is hidden because otherwise the link would move to the next line and the navbar would be stretched to the next line-->
+            </div>
+        </div>
+
+    </nav>*@  
+
+
+        <nav style="z-index:100; width:100%">
+            <ul class=""><!--Add in "showing" bewtween the "" to make the navbar show by default-->
+                <li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <div class="dropdown">
+                            <div class="dropbtn">My Account</div>
+                            <div class="dropdown-content">
+                                <a class="dropdown-item" style="font-size:small; float:left" href="@Url.Action("GetMyRestaurants", "Restaurant")">My Restaurants</a>
+                                <a class="dropdown-item" style="font-size:small" href="@Url.Action("GetRecipes", "Recipes")">My Recipes</a>
+                                <a class="dropdown-item" style="font-size:small" href="@Url.Action("GetMyReviews", "Reviews")">My Restaurant Reviews</a>
+                                <a class="dropdown-item" style="font-size:small" href="@Url.Action("GetMyRecipeReviews", "RecipeReviews")">My Recipe Reviews</a>
+                                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+                                    <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item" style="text-decoration:none; color:black; font-size:16px"><strong>Log off</strong></a>
+                                }
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="dropdown">
+                            <div class="dropbtn">Join</div>
+                            <div class="dropdown-content">
+                                <span class="sr-only">Toggle Dropdown</span>
+
+
+                                <span class="dropdown-item" style="font-size:small"> @Html.ActionLink("Register", "Register", "Account", null, new Dictionary<string, object> { { "style", "text-decoration:none; color:black; font-size: 16px" }, { "id", "registerLink" }, { "class", "dropdown-item" } })</span>
+                                <span class="dropdown-item" style="font-size:small">@Html.ActionLink("Log in", "Login", "Account", null, new Dictionary<string, object> { { "style", "text-decoration:none; color:black; font-size: 16px" }, { "id", "registerLink" }, { "class", "dropdown-item" } })</span>
+                                @* <!--I am using an overload that takes a dictionary, because, without doing this, I was getting an error due to the number of overloads I was passing in as Html attributes*@
+                            </div>
+                        </div>
+                    }
+                </li>
+                <li class="hello">@Html.ActionLink("Home", "Index", "Home", null, new { style = "text-decoration:none; text; color:white" })<span class="sr-only">(current)</span></li><!--Passing text-decoration:none within the action link is the only way I could find to remove the underline in the navbar-->
+                <li class="hello">@Html.ActionLink("Restaurants", "Index", "Restaurant", null, new { style = "text-decoration:none;; color:white" })</li>
+                <li class="hello">@Html.ActionLink("Recipes", "Landing", "Recipes", null, new { style = "text-decoration:none;; color:white" })</li>
+                <li class="hello">@Html.ActionLink("About", "About", "Home", null, new { style = "text-decoration:none; color:white" })</li>
+                <!--Sourced from: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_js_dropdown_hover -->
+               
+            </ul>
+
+
+
+            @*<div class="login">@Html.Partial("_LoginPartial")</div>*@
+
+            <div class="handle">
+
+                <div class="ham">
+                    <div class="hamburger"></div><!--These three divs create the hamburger icon-->
+                    <div class="hamburger"></div>
+                    <div class="hamburger"></div>
+                </div><!--end of 'ham' class-->
+
+                <div class="menu">
+                    Menu
+                </div><!--end of 'menu' class-->
+
+            </div><!--end of 'handle' class-->
+        </nav>
+
+
+    @if (ViewBag.ShowBackBar != null && ViewBag.ShowBackBar)
+    {
+        <div class="backbar">
+            <div class="container">
+                @Html.ActionLink("Return to Home", "Index","Home", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    }
+
+    @*<div class="container body-content">*@
+        @RenderBody()
+       
+        
+        <footer>
+            <p style="float:right; padding-right:20px"><small>&copy; @DateTime.Now.Year - My ASP.NET Application</small></p>
+        </footer>
+
+
+    @*</div>*@
+
+
+    @Scripts.Render("~/bundles/otf")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.validate.bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+</body>
+</html>
+
+
+
+<!--Original Navbar-->
+
+@*
+<nav>
+    <ul class="">
+        <!--Add in "showing" bewtween the "" to make the navbar show by default-->
+        @*<li class="hello">@Html.ActionLink("Home", "Index", "Home")</li>
+        <li class="hello">@Html.ActionLink("Restaurants", "Index", "Restaurant")</li>
+        <li class="hello">@Html.ActionLink("Recipes", "Landing", "Recipes")</li>
+        <li class="hello">@Html.ActionLink("About", "About", "Home")</li>
+        <li class="hello">@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+        @*<li><a href="index.html"><span class="fa fa-home" aria-hidden="true"> Home</span></a></li>
+            <li><a href="profile.html"><span class="fa fa-user" aria-hidden="true"> Personal Profile</span></a></li>
+            <li><a href="experience.html"><span class="fa fa-briefcase" aria-hidden="true"> Experience</span></a></li>
+            <li><a href="education.html"><b><u><span class="fa fa-graduation-cap" aria-hidden="true"> Education</span></u></b></a></li>
+    </ul>
+    @*<div class="login">@Html.Partial("_LoginPartial")</div>*@
+
+    @*<div class="handle">
+
+        <div class="ham">
+            <div class="hamburger"></div><!--These three divs create the hamburger icon-->
+            <div class="hamburger"></div>
+            <div class="hamburger"></div>
+        </div><!--end of 'ham' class-->
+
+        <div class="menu">
+            Menu
+        </div><!--end of 'menu' class-->
+
+    </div><!--end of 'handle' class-->
+</nav>*@
+
+
+
+ <!--Dropdown code sourced from: https://v4-alpha.getbootstrap.com/components/dropdowns/   -->
+@*@if (Request.IsAuthenticated)
+            {
+                  
+    <div class="box btn-group dropdown">
+        <button type="button" class="btn btn-secondary" style="height:40px;">My Account</button>
+        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height:40px; pt-4">
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <div class="box dropdown-menu">
+            <a class="dropdown-item" href="@Url.Action("GetMyRestaurants", "Restaurant")">My Restaurant</a>
+            <a class="dropdown-item" href="@Url.Action("GetRecipes", "Recipes")">My Recipes</a>
+            <a class="dropdown-item" href="@Url.Action("GetMyReviews", "Reviews")">My Restaurant Reviews</a>
+            <a class="dropdown-item" href="@Url.Action("GetMyRecipeReviews", "RecipeReviews")">My Recipe Reviews</a>
+
+            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item" style="text-decoration:none; color:black; font-size:16px"><strong>Log off</strong></a>
+            }
+
+        </div>
+    </div>
+}
+else
+{
+    <div class="btn-group dropdown">
+        <button type="button" class="btn btn-secondary" style="height:40px;">Join</button>
+        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height:40px; pt-4">
+            <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <div class="dropdown-menu">
+            @Html.ActionLink("Register", "Register", "Account", null, new Dictionary<string, object> { { "style", "text-decoration:none; color:black; font-size: 16px" }, { "id", "registerLink" }, { "class", "dropdown-item" } })
+            @Html.ActionLink("Log in", "Login", "Account", null, new Dictionary<string, object> { { "style", "text-decoration:none; color:black; font-size: 16px" }, { "id", "registerLink" }, { "class", "dropdown-item" } })
+        </div>
+    </div>
+}*@

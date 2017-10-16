@@ -1,0 +1,54 @@
+﻿@model IPagedList<OdeToFood.Models.RestaurantReview>
+
+
+@{
+    ViewBag.Title = "GetMyReviews";
+}
+
+<h2 class="text-center py-4">Restaurant Reviews for @User.Identity.Name</h2>
+<div class="text-center py-4">
+    <button type="button" class="btn btn-success btn-lg mx-auto my-Z" onclick="window.location='@Request.UrlReferrer.AbsoluteUri'">Back</button>
+</div>
+
+<div class="container pl-4">
+    <table class="table">
+        <tr>
+            <th>
+                Restaurant Name
+            </th>
+            <th>
+                Rating
+            </th>
+            <th>
+               Title
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("Details", "Restaurant", new { id = item.RestaurantId })">@Html.DisplayFor(modelItem => item.RestaurantName.Name)</a> <!--Allows user to click on link to be brought to the particular restaurant-->
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+              
+                <td>
+                     <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-info btn-sm margin-right">
+                        <span class="glyphicon glyphicon-list">See More</span>
+                    </a>
+                   
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<div class="pl-5">
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount<!--Displays what page the user is on e.g. Page 1 of 2-->
+    @Html.PagedListPager(Model, page => Url.Action("DisplayList", new { page }))
+</div>

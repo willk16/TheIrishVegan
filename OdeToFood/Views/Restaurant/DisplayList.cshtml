@@ -1,0 +1,121 @@
+﻿@model IPagedList<OdeToFood.Models.Restaurant>
+
+@{
+    ViewBag.Title = "DisplayList";
+}
+
+
+@if (TempData["Message"] != null)//This code block diplays a notification to the user if they have created an entry.
+{
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        @TempData["Message"]
+    </div>
+}
+
+<div>
+
+  
+
+<!--This If statement check the value of the incoming Viewbag to determine how many days the results are showing for-->
+<div class="text-center pt-3">
+    @if (ViewBag.MyDate == "7 Days")
+    {
+        <h2>Restaurants added in the past @ViewBag.MyDate</h2>
+    }
+    else if (ViewBag.MyDate == "30 Days")
+    {
+        <h2>Restaurants added in the past @ViewBag.MyDate</h2>
+    }
+    else
+    {
+        <h2>All Restaurants</h2>
+    }
+</div>
+<hr />
+     
+
+        
+
+<div class="text-center py-4">
+    @if (Request.IsAuthenticated)
+    {
+        <a href="@Url.Action("Create")" class="btn btn-warning btn-lg">Create</a>
+    }
+    <a href="@Url.Action("Index", "Restaurant")" class="btn btn-success btn-lg  my-Z">Back</a><!--A simple back button to return to the previous page-->
+</div>
+
+    <div class="btn-group dropdownpt-3 pb-4" style="float:right">
+        <button type="button" class="btn btn-secondary" style="height:40px;">View By Date Added</button>
+        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height:40px; pt-4">
+            <span class="sr-only">Dropdown Menu</span><!--Screen readers only-->
+        </button>
+        <div class="dropdown-menu">
+            <a href="@Url.Action("DisplayList", "Restaurant")" class="dropdown-item">All</a>
+            <a href="@Url.Action("ByDate", "Restaurant")" class="dropdown-item">Last 7 days</a>
+            <a href="@Url.Action("ByDateMonth", "Restaurant")" class="dropdown-item">Last 30 days</a>
+        </div>
+    </div>
+
+
+<div class="container pl-4">
+    <table class="table">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Keyword
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.City)*@ County
+            </th>
+            <th class="hidden-xs-down"><!--This class will hide this part in screen sizes extra small-->
+                Images
+            </th>
+            <th></th>
+        </tr>
+
+
+        @foreach (var item in Model)
+            {
+            <tr style="height:90px">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Keyword)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td class="hidden-xs-down"><!--Image is hidden in small screens-->
+                    @if (item.ImagePath != null)
+                    {
+                        <img class="img-fluid" style="height:65px; width:95px" src="\Images\@item.ImagePath" alt="Card image cap">
+                    }
+                </td>
+                <td>
+                    <div>
+                        <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-info btn-sm margin-right">
+                            <span class="glyphicon glyphicon-list"></span>See More
+                        </a>
+                        @if (item.UserName == User.Identity.Name)
+                        {
+                            <div class="btn btn-danger btn-sm">My Entry</div>
+                        }
+                    </div>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+   
+</div>
+<div class="pl-5">
+    
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount<!--Displays what page the user is on e.g. Page 1 of 2-->
+    @Html.PagedListPager(Model, page => Url.Action("DisplayList", new { page }))
+</div>

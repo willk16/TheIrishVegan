@@ -1,0 +1,58 @@
+﻿@model IEnumerable<OdeToFood.Models.Restaurant>
+
+@{
+    ViewBag.Title = "GetMyRestaurants";
+}
+
+<h2 class="text-center pt-4">Restaurants for <span style="color:blue"> @User.Identity.Name</span></h2>
+
+<p class="text-center pt-3">
+    <a href="@Url.Action("Create")" class="btn btn-warning btn-lg">
+        <span class="glyphicon glyphicon-list"></span> Create
+    </a>
+        <button type="button" class="btn btn-success btn-lg mx-auto my-Z" onclick="window.location='@Request.UrlReferrer.AbsoluteUri'">Back</button>   
+</p>
+
+<div class="container pl-4 pt-3">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Keyword)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Keyword)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
+                    <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-info btn-sm margin-right">
+                        <span class="glyphicon glyphicon-list"></span>See More
+                    </a> 
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

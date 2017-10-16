@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+
+@using (Html.BeginForm("Search", "Restaurant", FormMethod.Get))
+{
+    <b>Search By:</b>
+    @Html.RadioButton("searchBy", "Restaurant", true) <text>Restaurant</text>
+    @Html.RadioButton("searchBy", "Review") <text>Recipe</text>
+    <br />
+    @Html.TextBox("search") <input type="submit" value="search" />
+
+}
+
+<p>Use this area to provide additional information.</p>
+
+
+<form action="~/Home/Score" method="post">
+    <input type="search" name="input" />
+    <input type="submit" value="Search By Number rating" />
+</form>

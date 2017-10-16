@@ -1,0 +1,80 @@
+﻿@model OdeToFood.Models.Recipe
+
+@using OdeToFood.Models
+
+
+
+<div class="container pt-4" style="width: 100%;">
+
+    @using (Html.BeginForm("Create", "Recipes", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @*@Html.ValidationSummary("The following errors were found:", new { @class = "alert alert-danger" })*@
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Name, "{0:d}", new { @class = "form-control datepicker" })
+                </div>
+
+
+                @Html.HiddenFor(m => m.UserName)
+                @Html.HiddenFor(m => m.Date)
+
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Category, new { @class = "control-label" })
+                    @Html.DropDownListFor(m => m.Category, RecipeCategories.SelectListItems, "Select", new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Description, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Timescale, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Timescale, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ImageFileName, htmlAttributes: new { @class = "control-label " })
+                    <div class="col-md-10">
+                        <input type="file" name="file" value="browse" />
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ImageFileName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Instructions, new { @class = "control-label" })
+                    @Html.TextAreaFor(m => m.Instructions, 10, 5, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Ingredients, new { @class = "control-label" })
+                    @Html.TextAreaFor(m => m.Ingredients, 10, 5, new { @class = "form-control" })
+                </div>
+
+            </div>
+
+            <div class="col-md-12">
+                <div class="pad-top">
+                    <button type="submit" class="btn btn-success btn-lg margin-right">
+                        <span class="glyphicon glyphicon-save"></span> Save
+                    </button>
+                    <a href="@Url.Action("Index")" class="btn btn-warning btn-lg">
+                        <span class="glyphicon glyphicon-remove"></span> Cancel
+                    </a>
+                </div>
+            </div>
+
+        </div><!--/row-->
+    }
+</div>

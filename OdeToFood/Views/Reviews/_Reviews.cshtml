@@ -1,0 +1,49 @@
+﻿@model IEnumerable<OdeToFood.Models.RestaurantReview>
+@using OdeToFood.Models
+
+
+
+<div class="container pl-4">
+    <table class="table">
+        <tr>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>     
+            <th>
+                @Html.DisplayNameFor(model => model.ReviewerName)
+            </th>
+            <th>Details</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    <a href="@Url.Action("SeeReviewersRestaurantsReviews", "Reviews", new { r = item.ReviewerName })">@Html.DisplayFor(modelItem => item.ReviewerName)</a>
+                </td>
+                <td>
+                    <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-info btn-sm margin-right">
+                        See More
+                    </a>
+                    @if (item.ReviewerName == User.Identity.Name)
+                        {
+                            <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-danger btn-sm margin-right">
+                                My Entry
+                            </a>
+                        }
+                </td>
+            </tr>
+        }
+    </table>
+</div>

@@ -1,0 +1,75 @@
+﻿@model OdeToFood.Models.Restaurant
+@using OdeToFood.Models
+
+<div class="container pt-4" style="width: 100%;">
+
+    <!--The '@@using' statement ensures that the Dispose() method from the IDisposable interface will be called at the end of the form.-->
+    @using (Html.BeginForm("Create", "Restaurant", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @*@Html.ValidationSummary("The following errors were found:", new { @class = "alert alert-danger" })*@
+        <!--The 'true' parameter in the below line means that only global validation messages are shown-->
+        @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+
+        <div class="row">
+
+            <div class="col-md-6">
+                    @Html.HiddenFor(m => m.UserName)
+                    @Html.HiddenFor(m => m.Date)
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Name, "{0:d}", new { @class = "form-control datepicker" })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.City, new { @class = "control-label" })
+                    @Html.DropDownListFor(m => m.City, Counties.SelectListItems, "Select", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Keyword, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Keyword, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Keyword, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ImageFileName, htmlAttributes: new { @class = "control-label " })
+                    <div class="col-md-10">
+                        <input type="file" name="file" value="browse" />
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ImageFileName, "", new { @class = "text-danger" })
+                </div>
+
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Description, new { @class = "control-label" })
+                    @Html.TextAreaFor(m => m.Description, 10, 5, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="pad-top">
+                    <button type="submit" class="btn btn-success btn-lg margin-right">
+                        <span class="glyphicon glyphicon-save"></span> Save
+                    </button>
+                    <a href="@Url.Action("DisplayList")" class="btn btn-warning btn-lg">
+                        <span class="glyphicon glyphicon-remove"></span> Cancel
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    }
+</div>
+
+

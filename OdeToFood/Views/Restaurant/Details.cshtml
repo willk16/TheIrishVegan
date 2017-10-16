@@ -1,0 +1,100 @@
+﻿@model OdeToFood.Models.Restaurant
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@*<h4>TWITTER</h4>
+<a class="twitter-share-button"
+   href="https://twitter.com/intent/tweet?text=Hello%20world"
+   data-size="large">
+    Tweet
+</a>
+
+<h4>TWITTER 2</h4>
+<a href="https://twitter.com/share" class="twitter-share-button"
+   data-via="SmashDev" data-size="large"
+   data-hashtags="comicbooks">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>*@
+
+
+<div class="container text-center">
+    <h3 class="text-center pt-4" >@Model.Name</h3>
+    <hr />
+
+   
+
+</div><!--/container-->
+<div class="row pl-4" style="max-width:100%">
+<!--Image will only appear if it is not equal to null. Otherwise an empty image symbol would be displayed in its place-->
+
+@if (Model.ImagePath != null)
+{
+    <div class="col-md-6 col-lg-4 text-center">
+        <div class="card mb-3">
+            <img class="card-img-top img-fluid" src="\Images\@Model.ImagePath" alt="Card image cap"><!--img-fluid allows the image to scale with its column. Otherwise, the original size of the image may burst out of the card container-->
+            <div class="card-block">
+                
+                <p class="card-text">@Html.DisplayFor(m => m.Keyword)</p>
+            </div>
+        </div>
+    </div>
+}
+    <div class="col-md-6"><dl class="dl-horizontal" style="font-size:large">
+
+         <dt style="padding-left: 25px; margin-left: 25px;">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+    
+        <dd style="padding: 25px; margin: 25px;  width:500px; word-wrap:break-word">
+            
+            @Model.Description 
+        </dd>
+        
+
+        
+        <dd>
+            @Html.DisplayFor(model => model.Keyword)
+        </dd>
+
+        <dt>
+           County
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+    </dl>
+</div>
+
+
+</div><!--/row-->
+
+
+
+<p class="text-center">
+    @*<a href="@Url.Action("Create", "Reviews", new { restaurantId = Model.Id })" class="btn btn-primary btn-lg">Add Review</a>*@
+    <a href="@Url.Action("Index", "Reviews", new { id = Model.Id })" class="btn btn-lg btn-info ">Reviews</a>
+    <button type="button" class="btn btn-success btn-lg mx-auto my-Z" onclick="window.location='@Request.UrlReferrer.AbsoluteUri'">Back</button>
+ 
+</p>
+
+<!--These options only display if the entry belongs to the user-->
+@if (Model.UserName == User.Identity.Name)
+{
+<p class="text-center">
+    <a href="@Url.Action("Edit", "Restaurant", new { id = Model.Id })" class="btn btn-warning">Edit</a>
+    <a href="@Url.Action("Delete", "Restaurant", new { id = Model.Id })" class="btn btn-danger">Delete</a>
+
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |*@
+</p>
+}

@@ -1,0 +1,344 @@
+/* Dropdown Button */
+.dropbtn {
+    background-color: green;
+    color: white;
+    
+    font-size:24px;
+    border: none;
+    cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+   font-weight:bold;
+}
+
+
+
+
+
+/*.navbar .navbar-brand{
+    color: rgba(255, 255, 255, .85);
+    font-size: 1rem;
+    padding-top: .45rem;
+}*/
+
+
+body{
+    background-color: #4bef45;
+}
+/*.jumbotron{
+    background: url('../images/VeggieGrill.jpg');
+    background-size: cover;
+    width: 100%;
+}*/
+
+.btn, .active{
+    transition: .4s;
+}
+
+.image{
+    padding-top: 30px;
+    padding-left: 20px;
+}
+
+.login{
+    font-size: x-small;
+}
+
+/*.left {
+	float: left;
+	background-color: #a49dad;
+	width: 50%;
+	height:250px;
+	font-size: 26px;
+	text-align: center;
+    margin-top:20px;
+}
+.left ul {
+	list-style: none;
+	font-size: 22px;
+}
+
+/**This Button code is taken from: https://www.css-tricks.com/examples/ButtonMaker/# **/
+.button {
+	float: left;
+   border-top: 1px solid #96d1f8;
+   background: #65a9d7;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+   background: -o-linear-gradient(top, #3e779d, #65a9d7);
+   padding: 5px 10px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 14px;
+   font-family: Georgia, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   width: 80px;;
+   margin-left: 20px;
+   text-align: center;
+   }
+.button:hover {
+   border-top-color: #28597a;
+   background: #28597a;
+   color: #ccc;
+   }
+.button:active {
+   border-top-color: #1b435e;
+   background: #1b435e;
+   }
+/*
+.buttonx {
+	float: right;
+   border-top: 1px solid #96d1f8;
+   background: #65a9d7;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+   background: -o-linear-gradient(top, #3e779d, #65a9d7);
+   padding: 5px 10px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 14px;
+   font-family: Georgia, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   width: 80px;
+   /**Or 1090px**/
+   /*text-align: center;
+   }
+.buttonx:hover {
+   border-top-color: #28597a;
+   background: #28597a;
+   color: #ccc;
+   }
+.buttonx:active {
+   border-top-color: #1b435e;
+   background: #1b435e;
+   }
+}*/
+
+
+/*@media only screen and (max-width:1348px) {
+	#container{
+		width: 100%;
+	}
+	#left-column{
+		width: 50%;
+	}
+	#right-column{
+		width: 50%;
+	}
+}
+@media only screen and (max-width:640px) {
+	#left-column{
+		width: 50%;
+	}
+	#right-column{
+		width: 50%;
+	}
+}*/
+
+@media all and (min-width:411px) and (max-width:600px) {
+	.name {
+		width:50%;
+	}
+	.footer {
+		width: 100%;
+	}
+	.orange {
+		width: 50%;
+	}
+	.banana{
+		width: 50%;
+	}
+}		
+@media all and (max-width: 415px) {
+     nav ul{
+        overflow:hidden;      
+    }
+    .box{
+         overflow:visible;
+     }
+}
+@media all and (max-width:800px) {
+    .name {
+        display: none;
+    }
+     nav ul{
+        overflow:hidden;
+    }
+     .box{
+         overflow:visible;
+     }
+     div h1 {
+        font-size:small;
+    }
+
+}
+@media all and (max-width:411px) {
+	
+    nav ul{
+        overflow:hidden;
+    }
+}
+.orange {
+	float: left;
+	background-color: silver;
+	width: 50%;
+	height:100px;
+	font-size: 20px;
+	text-align: center;
+	padding-top: 20px;
+}
+.banana {
+	float: left;
+	background-color: silver;
+	width:50%;
+	height:100px;
+	font-size: 20px;
+	text-align: center;
+	padding-top: 20px;
+	padding-right: 20px;
+}
+
+nav ul{
+	font-size: 26px;
+	background-color: green;
+	color: white;
+	padding: 0;
+    
+	text-align: center;
+	margin: 0;
+	-webkit-transition: max-height 0.4s;
+	-ms-transition: max-height 0.4s;
+	-moz-transition: max-height 0.4s;
+	-o-transition: max-height 0.4s;
+	transition: max-height 0.4s;  /*Sets the length of time it takes for the nav bar to go from hidden to max-height*/
+
+}
+nav ul li {
+	display: inline-block;
+	padding: 20px;  
+}
+.hello:hover{
+	
+   font-weight:bold;
+}
+
+
+a {
+	text-decoration: none;
+}
+
+.hello {
+	text-decoration: none;
+}
+section {
+	width: 100%;
+	margin: 0 auto;
+}
+.handle {
+	font-size: 26px;
+	width: 100%;
+	background: green;
+	text-align: left;
+	box-sizing: border-box;
+	padding: 15px 10px;
+	cursor: pointer;
+	color: white;
+	display: none;
+}
+.hamburger {
+	width: 35px;
+    height: 5px;
+    background-color: black;
+    margin: 6px 0;
+	display: none;
+	border-radius: 4px;
+}
+@media screen and (min-width:779px) and (max-width: 1500px){
+     td{
+         font-size:20px;
+     }  
+}
+
+@media screen and (max-width:778px) {
+	nav ul {
+		max-height: 0; /*Hides the nav bar*/
+	}
+	.showing {
+		max-height: 20em; /*This will show the nav bar to the height of 20em*/
+	}
+	nav ul li {
+		box-sizing: border-box;
+		width: 100%;
+		padding: 15px;
+		text-align: left;
+		border-top: 1px solid #BDC3C7; /*This adds the lines between the nav parts*/
+	}
+	.handle, .hamburger {
+		display: block;  /*The divs will apear in a block display format*/
+	}
+	td{
+        font-size:15px;
+	}
+}
+
+.ham {
+	float: left;
+}
+
+.menu {
+	display: inline-block;
+	padding-left: 60%;
+    
+}

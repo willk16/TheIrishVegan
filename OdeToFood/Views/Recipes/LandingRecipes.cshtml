@@ -1,0 +1,125 @@
+﻿@model OdeToFood.Models.Recipe
+@using OdeToFood.Models
+@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "LandingRecipes";
+}
+
+@if (TempData["Message"] != null)//This code block diplays a notification to the user if they have created an entry.
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        @TempData["Message"]
+    </div>
+}
+
+<div class="container text-center">
+    <h1 class="display-2 mt-5">Vegan Recipes</h1><!--mt-3 stands for margin-top-->
+    <p class="lead pb-3">Your Complete Guide to Vegan Recipes</p>
+
+    <form action="/Recipes/Index" method="get">
+        <div class="col-lg-6 offset-lg-3"><!--The offset value ensures the search bar is directly below the headings-->
+            <div class="input-group"><!--This class allows the input box and the button to be positioned beside each other-->
+
+                <input type="search" name="search" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">Go!</button>
+                </span>
+            </div>       
+            <br />          
+        </div>
+    </form>
+
+
+    <h4>Search By Category</h4>
+        @using (Html.BeginForm("Category", "Recipes", FormMethod.Get))
+                {
+            @Html.DropDownListFor(model => model.Category, RecipeCategories.SelectListItems, "Select", new { htmlAttributes = new { @class = "form-control" } })
+            <input type="submit" value="Search" class="btn btn-primary" />
+        }
+    <br />
+    @*<h4>Search By Time</h4>
+        @using (Html.BeginForm("ByTime", "Recipes", FormMethod.Get))
+        {
+            @Html.DropDownListFor(model => model.Timescale, RecipeCategories.SelectListItemByTime, "Select", new { htmlAttributes = new { @class = "form-control" } })
+            <input type="submit" value="time" name="time" class="btn btn-primary" />
+            @Html.DropDownList("time", ((SelectList)ViewBag.SelectList), "Select")//This is creating my dropdown list with my dictionary values.
+            <input type = "submit" value="Time" class="btn btn-primary" />
+        }*@
+    <br />
+    <br />
+    <div class="col-md-12 text-sm-center pb-4">
+        <a href="@Url.Action("DisplayList")" class="btn btn-info btn-lg">
+            <span class="glyphicon glyphicon-list"></span> Display All
+        </a>
+        @if (Request.IsAuthenticated)
+        {
+            <a href="@Url.Action("Create")" class="btn btn-warning btn-lg">
+                <span class="glyphicon glyphicon-list"></span> Create
+            </a>
+        }
+    </div>
+   
+    
+</div><!--End of container div-->
+
+<br />
+<br />
+
+<div class="container  text-center">
+
+
+    <div class="row">
+
+        <div class="col-md-6 col-lg-4">
+            <div class="card mb-3">
+                <img class="card-img-top img-fluid" src="~/images/RecipesImage.jpg" alt="Card image cap"><!--img-fluid allows the image to scale with its column. Otherwise, the original size of the image may burst out of the card container-->
+                <div class="card-block">
+                    <p class="card-text">Browse Our Vegan Recipes</p>
+                </div>
+            </div>
+        </div>
+    
+
+        <div class="col-md-6 col-lg-4">
+            <div class="card mb-3">
+                <img class="card-img-top img-fluid" src="~/images/RecipesImage2.jpeg" alt="Card image cap"><!--img-fluid allows the image to scale with its column. Otherwise, the original size of the image may burst out of the card container-->
+                <div class="card-block">
+                    <p class="card-text">Browse Our Vegan Recipes</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="card mb-3">
+                <img class="card-img-top img-fluid" src="~/images/RecipeImage4.jpg" alt="Card image cap"><!--img-fluid allows the image to scale with its column. Otherwise, the original size of the image may burst out of the card container-->
+                <div class="card-block">
+                    <p class="card-text">Browse Our Vegan Recipes</p>
+                </div>
+            </div>
+        </div>
+    </div><!--/row-->
+
+</div><!--/container-->
+
+
+
+    @*
+        @using (Html.BeginForm("Decide", "Restaurant", FormMethod.Get))
+        {
+            <b>Search By:</b>
+            <label class="radio-inline">
+                <!--This class allows for the user to click on the text beside the radio button too-->
+                @Html.RadioButton("searchBy", "Name", true) <text>Name</text>
+            </label>
+            <label class="radio-inline">
+                @Html.RadioButton("searchBy", "City") <text>City</text>
+            </label>
+
+            <br />
+            @Html.TextBox("search") <input type="submit" value="search" />
+
+        }*@

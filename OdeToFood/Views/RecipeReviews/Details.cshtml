@@ -1,0 +1,56 @@
+﻿@model OdeToFood.Models.RecipeReview
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 class="text-center py-4">@Model.RecipeName.Name</h2>
+
+<div class="container text-center">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RecipeName.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecipeName.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Body)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Body)
+        </dd>
+
+    
+
+    </dl>
+</div>
+
+<p class="text-center">
+    @*<a class="back_button" href="@Request.UrlReferrer">Back</a>*@
+
+    <button type="button" class="btn btn-success" onclick="window.location='@Request.UrlReferrer.AbsoluteUri'">Back</button><!--A back button that will return the user to the page they came from-->
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning"}) 
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger"  })  
+</p>
+

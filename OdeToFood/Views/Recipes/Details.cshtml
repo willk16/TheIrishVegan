@@ -1,0 +1,130 @@
+﻿@model OdeToFood.Models.Recipe
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container pt-4" style="width: 100%;">
+    
+    <h2 class="text-center">@Model.Name</h2>
+        <hr />
+
+    <div class="row">
+        <div class="col-md-12">
+            <!--Image will only appear if it is not equal to null. Otherwise an empty image symbol would be displayed in its place-->
+
+            @if (Model.ImagePath != null)
+            {
+                <div class="col-md-6 col-lg-4 text-center">
+                    <div class="card mb-3">
+                        <img class="card-img-top img-fluid" src="\Images\@Model.ImagePath" alt="Card image cap"><!--img-fluid allows the image to scale with its column. Otherwise, the original size of the image may burst out of the card container-->
+                       
+                    </div>
+                </div>
+            }
+            <div class="list-group">
+
+                @Html.DisplayNameFor(model => model.Category):
+
+                @Html.DisplayFor(model => model.Category)
+            </div>
+            <div class="list-group">
+                @Html.DisplayNameFor(model => model.Description)
+
+                @Html.DisplayFor(model => model.Description)
+            </div>
+
+            <div class="list-group">
+                @Html.DisplayNameFor(model => model.Timescale)
+
+                @Html.DisplayFor(model => model.Timescale)
+            </div>
+        </div>
+
+        <div class="col-md-12">
+
+            <div class="col-md-6">
+                <div>
+                    @Html.DisplayNameFor(model => model.Instructions)
+
+                    <div style="padding: 25px; margin: 25px;  width:400px; word-wrap:break-word">
+                        <!--'word-wrap': break forces the text to move to a new line when it hits the mx width-->
+                        @Model.Instructions
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                @Html.DisplayNameFor(model => model.Ingredients)
+
+                @Html.DisplayFor(model => model.Ingredients)
+            </div>
+        </div>
+    </div><!--/row--> 
+</div><!--/container-->
+
+<p class="text-center">
+    @*<a href="@Url.Action("Create", "Reviews", new { restaurantId = Model.Id })" class="btn btn-primary btn-lg">Add Review</a>*@
+    <a href="@Url.Action("Index", "RecipeReviews", new { id = Model.Id })" class="btn btn-success ">Reviews</a>
+    <a href="@Url.Action("DisplayList", "Recipes")" class="btn btn-info">Back to List</a>
+</p>
+
+<!--These Edit and Delete options only display if the entry belongs to the user-->
+@if (Model.UserName == User.Identity.Name)
+{
+    <p class="text-center">
+        <a href="@Url.Action("Edit", "Recipes", new { id = Model.Id })" class="btn btn-warning">Edit</a>
+        <a href="@Url.Action("Delete", "Recipes", new { id = Model.Id })" class="btn btn-danger">Delete</a>
+    </p>
+}
+
+
+<div class="row">
+
+    <div class="col-md-6">
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+            @Html.DisplayFor(m => m.Name, "{0:d}", new { @class = "form-control datepicker" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Category, new { @class = "control-label" })
+            @Html.DisplayFor(m => m.Category, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Description, new { @class = "control-label" })
+            @Html.DisplayFor(m => m.Description, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Timescale, new { @class = "control-label" })
+            @Html.DisplayFor(m => m.Timescale, new { @class = "form-control" })
+        </div>
+
+        @if (Model.ImagePath != null)
+            {
+            <div class="text-center">
+                <div class="card mb-3">
+                    <img class="card-img-top img-fluid" src="\Images\@Model.ImagePath" alt="Card image cap"><!--img-fluid allows the image to scale with its column. Otherwise, the original size of the image may burst out of the card container-->
+
+                </div>
+            </div>
+            }
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Instructions, new { @class = "control-label" })
+            @Html.DisplayFor(m => m.Instructions, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Ingredients, new { @class = "control-label" })
+            @Html.DisplayFor(m => m.Ingredients, new { @class = "form-control" })
+        </div>
+
+    </div>
+</div><!--/row-->

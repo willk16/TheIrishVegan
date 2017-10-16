@@ -1,0 +1,56 @@
+﻿@model IPagedList<OdeToFood.Models.RecipeReview>
+
+@{
+    ViewBag.Title = "GetMyRecipeReviews";
+}
+
+<h2 class="text-center py-4">Recipe Reviews for @User.Identity.Name</h2>
+<div class="text-center">
+<button type="button" class="btn btn-success btn-lg mx-auto my-Z" onclick="window.location='@Request.UrlReferrer.AbsoluteUri'">Back</button>
+</div>
+
+<div class="container pl-4 pt-3">
+    <table class="table">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Rating
+            </th>
+            <th>
+                Title
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RecipeName.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>                   
+                    <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-info btn-sm margin-right">
+                        <span class="glyphicon glyphicon-list">See More</span>
+                    </a>                  
+                </td>
+            </tr>
+        }
+
+    </table>
+</div><!--/container-->
+<!--This paging display will only appear if there is at least 1 item to show-->
+@if (Model.Count >= 1)
+{
+    <div class="pagedList" data-otf-target="#recipeList">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount<!--Displays what page the user is on e.g. Page 1 of 2-->
+        @Html.PagedListPager(Model, page => Url.Action("GetMyRecipeReviews", new { page }))
+    </div>
+}

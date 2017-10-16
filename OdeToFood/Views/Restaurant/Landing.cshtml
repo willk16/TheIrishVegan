@@ -1,0 +1,183 @@
+﻿@model IEnumerable<OdeToFood.Models.RestaurantListViewModel>
+@using Microsoft.AspNet.Identity.EntityFramework
+@{
+    ViewBag.Title = "Landing";
+    ViewBag.ShowBackBar = false;
+}
+
+@*<link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui.js"></script>
+<script src="~/Scripts/jquery-ui.min.js"></script>*@
+
+@*<script type="text/javascript">
+    $(function () {
+        $("#txtSearch").autocomplete({
+            source: '@Html.Action("GetStudents")'
+        }
+            );
+    });
+</script>*@
+
+
+
+
+
+@*<div class="container pt-4" style="width: 100%;">
+
+    <div class="row">
+        <div class="col-md-12 text-sm-center pb-4">
+            <h2>Restaurants</h2>
+        </div>
+        <div class="col-md-12 text-sm-center pb-4">
+            @Html.ActionLink("Display All", "DisplayList")
+            <a href="@Url.Action("DisplayList")" class="btn btn-info btn-lg">
+                <span class="glyphicon glyphicon-list"></span> Display All
+            </a>
+        </div>
+        <div class="col-md-6">
+
+            <form action="/Restaurant/Check" method="get">
+                <input type="search" name="searchTerm" />
+                <input type="submit" value="Search By Name" />
+            </form>
+            <br />
+            <br />
+
+        </div>
+        <div class="col-md-6">
+
+            @using (Html.BeginForm("Decide", "Restaurant", FormMethod.Get))
+            {
+                <b>Search By:</b>
+                
+                <label class="radio-inline">
+                    <!--This class allows for the user to click on the text beside the radio button too-->
+                    @Html.RadioButton("searchBy", "Name", true) <text>Name</text>
+                </label>
+
+                <label class="radio-inline">
+                    @Html.RadioButton("searchBy", "City") <text>City</text>
+                </label>
+               
+                @Html.TextBox("search") <input type="submit" value="search" />
+            }
+        </div>
+        </div><!--/Row-->
+</div><!-- /Container -->*@
+
+
+@*@using (Ajax.BeginForm(
+                    new AjaxOptions
+                    {
+                        HttpMethod = "get",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "restaurantList"
+
+                    }))
+
+    {
+        <input type="search" name="searchTerm" />
+        <input type="submit" value="Search By Name" />
+    }*@
+
+
+<div class="container text-center">
+    <h1 class="display-2 mt-5">Vegan Restaurants</h1><!--mt-3 stands for margin-top-->
+    <p class="lead pb-3">Your Complete Guide to Vegan Restaurants</p>
+
+    <form action="/Restaurant/Check" method="get">
+        <div class="col-lg-6 offset-lg-3">
+            <!--The offset value ensures the search bar is directly below the headings-->
+            <div class="input-group"><!--This class allows the input box and the button to be positioned beside each other-->
+
+                <input type="search" name="searchTerm" class="form-control" placeholder="Search by name..">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">Go!</button>
+                </span>
+
+            </div>
+        </div>
+    </form>
+    <br />
+    <br />
+    
+    <div class="col-lg-4 offset-lg-4"><!--This div is used to resize the search box. WIthout this div and class, the search bar would cover the majority of the page's width-->
+        @using (Html.BeginForm("Decide", "Restaurant", FormMethod.Get))
+            {
+            <b>Search By:</b>
+            <label class="radio-inline">
+                <!--This class allows for the user to click on the text beside the radio button too-->
+                @Html.RadioButton("searchBy", "Name", true) <text>Name</text>
+            </label>
+                <label class="radio-inline">
+                    @Html.RadioButton("searchBy", "City") <text>City</text>
+                </label>
+                <div class="input-group">
+                    <input type="search" name="search" class="form-control" placeholder="Search..">
+                    @*@Html.TextBox("search")*@ <input type="submit" value="Search" class="btn btn-primary" />
+                </div>
+        }
+    </div>
+    <br />
+    <br />
+
+    <div class="col-md-12 text-sm-center pb-4">
+        <a href="@Url.Action("DisplayList")" class="btn btn-info btn-lg">
+            <span class="glyphicon glyphicon-list"></span> Display All
+        </a>
+        @if (Request.IsAuthenticated)
+        {
+            <a href="@Url.Action("Create")" class="btn btn-warning btn-lg">
+                <span class="glyphicon glyphicon-list"></span> Create
+            </a>
+        }
+        @*@Html.ActionLink("Create New", "Create")*@
+    </div>
+    
+
+</div><!--End of container div-->
+
+
+
+
+<div class="container  text-center">
+
+
+    <div class="row">
+
+        <div class="col-md-6 col-lg-4">
+            <div class="card mb-3">
+                <img class="card-img-top img-fluid" src="~/images/Restaurant3.jpeg" alt="Card image cap"><!--img-fluid allows the image to scale with its column. Otherwise, the original size of the image may burst out of the card container-->
+                <div class="card-block">
+                    <p class="card-text">Browse Our Vegan Friendly Restaurants</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6 col-lg-4">
+            <div class="card mb-3">
+                <img class="card-img-top img-fluid" src="~/images/Restaurant5.jpeg" alt="Card image cap"><!--img-fluid allows the image to scale with its column. Otherwise, the original size of the image may burst out of the card container-->
+                <div class="card-block">
+                    <p class="card-text">Browse Our Vegan Friendly Restaurants</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="card mb-3">
+                <img class="card-img-top img-fluid" src="~/images/Restaurant4.jpg" alt="Card image cap"><!--img-fluid allows the image to scale with its column. Otherwise, the original size of the image may burst out of the card container-->
+                <div class="card-block">
+                    <p class="card-text">Browse Our Vegan Friendly Restaurants</p>
+                </div>
+            </div>
+        </div>
+    </div><!--/row-->
+
+</div>
+
+
+@*@Html.Partial("Carousel")*@
+
+
+

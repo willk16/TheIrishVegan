@@ -1,0 +1,99 @@
+﻿@model OdeToFood.Models.Restaurant
+@using OdeToFood.Models
+
+@{
+    ViewBag.Title = "Create2";
+
+    var SelectListItems = new[]
+   {
+        new SelectListItem() {Value = "Antrim", Text = "Antrim" },
+        new SelectListItem() {Value = "Armagh", Text = "Armagh" },
+        new SelectListItem() {Value = "Carlow", Text = "Carlow" },
+        new SelectListItem() {Value = "Cavan", Text = "Cavan" },
+        new SelectListItem() {Value = "Clare", Text = "Clare" },
+        new SelectListItem() {Value = "Cork", Text = "Cork" },
+        new SelectListItem() {Value = "Derry", Text = "Derry" },
+        new SelectListItem() {Value = "Donegal", Text = "Donegal" },
+        new SelectListItem() {Value = "Down", Text = "Down" },
+        new SelectListItem() {Value = "Dublin", Text = "Dublin" },
+        new SelectListItem() {Value = "Fermanagh", Text = "Fermanagh" },
+        new SelectListItem() {Value = "Galway", Text = "Galway" },
+        new SelectListItem() {Value = "Kerry", Text = "Kerry" },
+        new SelectListItem() {Value = "Kildare", Text = "Kildare" },
+        new SelectListItem() {Value = "Kilkenny", Text = "Kilkenny" },
+        new SelectListItem() {Value = "Laois", Text = "Laois" },
+        new SelectListItem() {Value = "Leitrim", Text = "Leitrim" },
+        new SelectListItem() {Value = "Limerick", Text = "Limerick" },
+        new SelectListItem() {Value = "Longford", Text = "Longford" },
+        new SelectListItem() {Value = "Louth", Text = "Louth" },
+        new SelectListItem() {Value = "Mayo", Text = "Mayo" },
+        new SelectListItem() {Value = "Meath", Text = "Meath" },
+        new SelectListItem() {Value = "Monaghan", Text = "Monaghan" },
+        new SelectListItem() {Value = "Offaly", Text = "Offaly" },
+        new SelectListItem() {Value = "Roscommon", Text = "Roscommon" },
+        new SelectListItem() {Value = "Sligo", Text = "Sligo" },
+        new SelectListItem() {Value = "Tipperary", Text = "Tipperary" },
+        new SelectListItem() {Value = "Tyrone", Text = "Tyrone" },
+        new SelectListItem() {Value = "Waterford", Text = "Waterford" },
+        new SelectListItem() {Value = "Westmeath", Text = "Westmeath" },
+        new SelectListItem() {Value = "Wexford", Text = "Wexford" },
+        new SelectListItem() {Value = "Wicklow", Text = "Wicklow" },
+    };
+}
+
+<h2>Create2</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary("The following errors were found:", new { @class = "alert alert-danger" })
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.City, new { @class = "control-label" })
+                @Html.DropDownListFor(m => m.Description, SelectListItems, "Select", new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Keyword, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.Keyword, new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Description, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Country, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.Country, new { @class = "form-control" })
+            </div>
+
+        </div>
+
+        <div class="col-md-12">
+            <div class="pad-top">
+                <button type="submit" class="btn btn-success btn-lg margin-right">
+                    <span class="glyphicon glyphicon-save"></span> Save
+                </button>
+                <a href="@Url.Action("Index")" class="btn btn-warning btn-lg">
+                    <span class="glyphicon glyphicon-remove"></span> Cancel
+                </a>
+            </div>
+        </div>
+
+    </div>
+}

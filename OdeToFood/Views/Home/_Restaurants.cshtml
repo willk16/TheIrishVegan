@@ -1,0 +1,18 @@
+﻿@model IEnumerable<OdeToFood.Models.RestaurantListViewModel>
+
+
+<div id="restaurantList">
+    <!--This represnets the area that we want to update when the user searches for something (i.e. Their search term remains in the search box rather than returning to blank)-->
+    @foreach (var item in Model)
+    {
+        <div>
+            <h4><a href="Restaurant/Details/@item.Id">@item.Name</a></h4>
+            <div>@item.City, @item.Country</div>
+            <div>
+                Reviews:  @item.CountOfReviews
+            </div>
+            <hr />
+        </div>
+
+    }
+</div>

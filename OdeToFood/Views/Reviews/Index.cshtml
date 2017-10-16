@@ -1,0 +1,54 @@
+﻿@model OdeToFood.Models.Restaurant
+
+@{ 
+    ViewBag.Title = "Index";
+}
+
+@if (Model.Reviews.Count != 0)
+{
+    <h2 class="text-center pt-3">Reviews for @Model.Name</h2>
+    if (Request.IsAuthenticated)
+    {
+      <button type="button" class="btn btn-info btn-lg d-block mx-auto my-5" data-toggle="modal" data-target="#register">Add Review</button>
+    }
+
+    <!--This partial view will display the list of current revies for the particular restaurant-->
+    @Html.Partial("_Reviews", Model.Reviews)<!--Here we are passing the Reviews (a collection of Reviews) that are associated with the Restaurant to the PartialView. (Model.Reviews is the object we are passing through as the second parameter)-->
+    <div class="text-center">
+        <button type="button" class="btn btn-warning btn-lg mx-auto my-Z" onclick="window.location='@Request.UrlReferrer.AbsoluteUri'">Back</button>
+
+    </div>
+}
+else
+{
+    @Html.Partial("_NoMatches")
+    if (Request.IsAuthenticated)
+    {
+        <button type="button" class="btn btn-info btn-lg d-block mx-auto my-5" data-toggle="modal" data-target="#register">Add Review</button>
+    }
+    <div class="text-center">
+        <a href="@Url.Action("Details", "Restaurant", new { id = Model.Id })" class="btn btn-warning btn-lg mx-auto my-Z">Back</a><!--A simple back button to return to the previous page-->
+    </div>
+}
+
+
+<!--==========================
+         FORM MODAL
+ ===========================-->
+<!--Modals are set to hidden by default, so it doesn't show up in the webpage. Rather you have to trigger their display by using a button-->
+<div id="register" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title">Create Review</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @{Html.RenderAction("Test", "Reviews", new { restaurantId = Model.Id });}
+            </div>
+        </div>
+    </div><!--End of Modal Dialog-->
+</div><!--End of Modal-->
+

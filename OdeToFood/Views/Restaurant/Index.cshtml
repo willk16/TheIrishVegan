@@ -1,0 +1,145 @@
+﻿@model IPagedList<OdeToFood.Models.RestaurantListViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="py-4 text-center">Searches for:  @ViewBag.SearchTerm</h2>
+
+
+    <div class="col-md-12 text-sm-center pb-4">
+        <a href="@Url.Action("DisplayList")" class="btn btn-info btn-lg">
+            <span class="glyphicon glyphicon-list"></span> Display All
+        </a>
+        @if (Request.IsAuthenticated)
+        {
+            <a href="@Url.Action("Create")" class="btn btn-warning btn-lg">
+                <span class="glyphicon glyphicon-list"></span> Create
+            </a>
+        }
+    </div>
+
+<div class="container pl-4">
+
+    <div class="pagedList" data-otf-target="#restaurantList">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+       PagedListRenderOptions.MinimalWithItemCountText)
+    </div>
+
+
+@if (Model.Count() == 0)
+{
+    <p class="text-center">No Matches</p>
+}
+else
+{
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Keyword)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Keyword)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>                      
+                        @Html.ActionLink("See More", "Details", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+    </table>
+
+    }
+</div>
+<a href="@Url.Action("Index")" class="btn btn-success btn-lg">
+    <span class="glyphicon glyphicon-list"></span> Back
+</a>
+
+    @*<!--This conditional is used to show a "No matches" message if the user input does not match any results-->
+    @if (Model.Count() == 0)
+    {
+        <p>No matches</p>
+    }
+    else
+    {
+        <!--This represnets the area that we want to update when the user searches for something (i.e. Their search term remains in the search box rather than returning to blank)-->
+        foreach (var item in Model)
+        {
+            <div>
+                <h4>@item.Name</h4>
+                <div>@item.City, @item.Country</div>
+                @*<div>
+                    Reviews: @item.CountOfReviews-->
+                </div>
+                <hr />
+            </div>
+        }
+    }*@
+   
+
+
+
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <p>
+        @Html.ActionLink("Display All", "DisplayAll")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                    @Html.ActionLink("Reviews", "Index", "Reviews", new { id = item.Id }, null)
+
+
+
+
+                </td>
+            </tr>
+        }
+
+    </table>*@
